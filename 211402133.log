@@ -1,0 +1,67 @@
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| busscheduledb      |
+| information_schema |
+| lab_pwl            |
+| laravel            |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sbd1               |
+| tabungan_siswa     |
+| task_manager       |
+| test               |
+| tubes_sbd          |
+| tubespwl           |
+| vehicle_management |
+| website_laravel    |
++--------------------+
+15 rows in set (0.001 sec)
+
+MariaDB [(none)]> use task_manager;
+Database changed
+MariaDB [task_manager]> SELECT * FROM task_plans;
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+| id                                   | task_name                               | ask_duration_start | task_duration_end | user_create                          | category_id                          | indicators_id                        | task_priority | task_status | created_at | updated_at |
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+| 924eaa0e-c8f1-4132-a032-1d98c176a8c3 | Membuat Modul add_to_cart pada Aplikasi | 2022-06-10         | 2022-06-30        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 5e72be09-384e-4097-8e78-c20e84d88112 |             1 | Pending     | NULL       | NULL       |
+| c96fdbd6-a3a4-42e3-b437-444ffd734a36 | Menganalisa Data Kemahasiswaan          | 2022-06-10         | 2022-06-17        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | e46f9318-ca1a-4a3d-a998-913c8fdf5917 | 669c981f-1bd6-47d5-b2ce-de568aaa160a |             2 | Process     | NULL       | NULL       |
+| f1ee037b-9135-41d2-9757-091391df4fb8 | Mendokumentasikan Code                  | 2022-06-10         | 2022-06-10        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 229d48a0-a643-42c2-832f-882297db9003 | 5e72be09-384e-4097-8e78-c20e84d88112 |             3 | Process     | NULL       | NULL       |
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+3 rows in set (0.000 sec)
+
+MariaDB [task_manager]> SELECT * FROM task_dailies;
+Empty set (0.000 sec)
+
+MariaDB [task_manager]> SELECT * FROM users;
++--------------------------------------+--------+---------------+-------------------+--------------+----------------+------------+------------+
+| id                                   | name   | email         | email_verified_at | password     | remember_token | created_at | updated_at |
++--------------------------------------+--------+---------------+-------------------+--------------+----------------+------------+------------+
+| 51ed88b2-fb06-4606-81ba-088e9ed52d1a | User B | userb@mail.co | NULL              | MD5('12345') | NULL           | NULL       | NULL       |
+| 72233152-7af0-4e89-94fc-d8d02e73aba8 | User A | user@mail.co  | NULL              | MD5('12345') | NULL           | NULL       | NULL       |
++--------------------------------------+--------+---------------+-------------------+--------------+----------------+------------+------------+
+2 rows in set (0.000 sec)
+
+MariaDB [task_manager]> INSERT INTO task_dailies (`id`, `user_id`, `plan_id`, `task_status`, `user_verify_id`, `task_comments`, task_prove)VALUES ('fb940b68-e866-11ec-8fea-0242ac120002', '72233152-7af0-4e89-94fc-d8d02e73aba8', 'c96fdbd6-a3a4-42e3-b437-444ffd734a36', 'Process', '72233152-7af0-4e89-94fc-d8d02e73aba8', 'OKE', 'asdasd');
+Query OK, 1 row affected, 1 warning (0.013 sec)
+
+MariaDB [task_manager]> desc task_dailies;
++--------------------+-------------------------------------------------+------+-----+---------+-------+
+| Field              | Type                                            | Null | Key | Default | Extra |
++--------------------+-------------------------------------------------+------+-----+---------+-------+
+| id                 | char(36)                                        | NO   | PRI | NULL    |       |
+| user_id            | varchar(255)                                    | NO   | MUL | NULL    |       |
+| plan_id            | varchar(255)                                    | NO   | MUL | NULL    |       |
+| task_status        | enum('Pending','Process','Finished','Canceled') | NO   |     | NULL    |       |
+| task_complete_date | date                                            | NO   |     | NULL    |       |
+| user_verify_id     | varchar(255)                                    | NO   | MUL | NULL    |       |
+| task_prove         | varchar(255)                                    | NO   |     | NULL    |       |
+| task_comments      | longtext                                        | NO   |     | NULL    |       |
+| created_at         | timestamp                                       | YES  |     | NULL    |       |
+| updated_at         | timestamp                                       | YES  |     | NULL    |       |
++--------------------+-------------------------------------------------+------+-----+---------+-------+
+10 rows in set (0.022 sec)
+
+MariaDB [task_manager]> 
